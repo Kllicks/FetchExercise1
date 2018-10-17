@@ -23,9 +23,10 @@ function getNextPokemon() {
         .then(getPokemonName)
         .then(drawName)
         index++;
-        // if (index = 949) {
-        //     index = 0;
-        // }
+        console.log(index);
+        if (index > 948) {
+            index = 0;
+        }
 }
 function getPrevPokemon() {
     fetch('https://pokeapi.co/api/v2/pokemon/')
@@ -33,9 +34,10 @@ function getPrevPokemon() {
         .then(getPokemonName)
         .then(drawName)
         index--;
-        // if (index = 0) {
-        //     index = 949;
-        // }
+        console.log(index);
+        if (index < 0) {
+            index = 948;
+        }
 }
 
 function convertToJson(r) {
