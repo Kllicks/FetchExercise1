@@ -5,47 +5,40 @@
 // DOM selection
 const triggerElement = document.querySelector('[ data-trigger]');
 const outputElement = document.querySelector('[ data-output]');
-const prevElement = document.querySelector('[data-prev]');
-const nextElement = document.querySelector('[data-next]');
-
+// const prevElement = document.querySelector('[data-prev]');
+// const nextElement = document.querySelector('[data-next]');
 
 // function that gets a pokemon name
 function getPokemon() {
-    fetch('https://pokeapi.co/api/v2/pokemon/1/')
+    fetch('https://pokeapi.co/api/v2/pokemon/')
         .then(convertToJson)
         .then(getPokemonName)
         .then(drawName)
 }
+
 // Attempt at next/prev button
-function getNextPokemon(currentPokemon) {
-    fetch('https://pokeapi.co/api/v2/pokemon/1/')
-        .then(r => r.json)
-        .then(currentPokemon => currentPokemon.name)
-    let index = r.indexOf(currentPokemon);
-    index++;
-    if (index === r.length) {
-        index = 0;
-    }
-    return r[index];
-}
-function getPrevPokemon(currentPokemon){
-    fetch('https://pokeapi.co/api/v2/pokemon/1/')
-        .then(r => r.json)
-        .then(currentPokemon => currentPokemon.name)
-    let index = r.indexOf(currentPokemon);
-    index--;
-    if (index < 0) {
-        index = r.length - 1;
-    }
-    return r[index];
-}
+// function getNextPokemon() {
+//     fetch('https://pokeapi.co/api/v2/pokemon/')
+//         .then(convertToJson)
+//         .then(getNextPokemonName)
+//         .then(drawName)
+// }
 
 function convertToJson(r) {
-    return r.json();
+    let conversion =  r.json();
+    // console.log(conversion);
+    return conversion;
 }
 
 function getPokemonName(nameObj) {
-    return nameObj.name;
+    // let name = nameObj.results[0].name;
+    let name = nameObj.map(a => a.results.name);
+    console.log(name);
+    return name;
+}
+
+function getNextPokemonName(nameObj) {
+    
 }
 
 function drawName(nameText) {
@@ -56,8 +49,8 @@ function drawName(nameText) {
 
 function main() {
     triggerElement.addEventListener('click', getPokemon);
-    prevElement.addEventListener('click', getPrevPokemon);
-    nextElement.addEventListener('click', getNextPokemon);
+    // prevElement.addEventListener('click', getPrevPokemon);
+    // nextElement.addEventListener('click', getNextPokemon);
 
 }
 main();
