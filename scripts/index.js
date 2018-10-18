@@ -54,7 +54,7 @@ function getPokemonName(nameObj) {
 }
 
 function drawName(nameText) {
-    const newName = document.createElement('a');
+    const newName = document.createElement('li');
     newName.textContent = nameText;
     outputElement.appendChild(newName);
 }
